@@ -1,14 +1,33 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const fs = require("fs");
 
-client.on("ready", () => {
-  console.log("I am ready!");
-});
+const config = require("./config.json");
+var collector;
+var chatlog;
+var msg;
+var commanding = false;
 
-client.on("message", (message) => {
-  if (message.content.startsWith("ping")) {
-    message.channel.send("pong!");
-  }
-});
-
-client.login("NDIxOTI4NDQ1NDk3NTczMzc3.DnDvGw.sjU7kFIsGCsSR7hzVQhEE4OKk2I");
+if (!commanding){
+	client.on("message", message => {
+	if(message.author.id !== config.onee) return;
+	if (message.content.includes("senpai?")) { 
+	commanding=true;
+	
+	message.channel.send("Yes Onee?");
+	}
+})
+}
+ if (commanding && (message.author.id == config.onee)){
+	 collector = channel.createMessageCollector();
+	 client.on("message", message => {
+		 if(message.content.contains("sic em")) {
+			 collector.stop();
+			 collector.on('end', chatlog = collected);
+			 msg = channel.fetchMessage(chatlog.last());
+			 msg => console.log(message.content);
+	 }
+ })
+ }
+client.login(config.token);
+	
